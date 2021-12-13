@@ -12,3 +12,5 @@ class InteresesForm(ModelForm):
     class Meta:
         model = Intereses
         fields = ['intereses_personales']
+
+InteresFormSet = inlineformset_factory(Encuesta, Intereses, fields=('intereses_personales',))

@@ -1,6 +1,6 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from .models import Encuesta, Intereses
-from .form import EncuestaForm, InteresesForm
+from .form import EncuestaForm, InteresFormSet
 from django.http import HttpResponse
 from reportlab.platypus import TableStyle, SimpleDocTemplate, Table
 from reportlab.lib import colors, pagesizes
@@ -13,6 +13,17 @@ def inicio(request):  #todo: ok
     return render(request, 'inicio.html')
 
 
+def agregar_interes_formset(request, pk):
+    encuesta = Encuesta.objects.get(id=pk)
+    if request.method == 'POST':
+        formset = InteresFormSet(request.POST, instance=encuesta)
+        if formset.is_valid():
+            formset.save()
+            return redirect('agregar_interes_formset', pk)
+    formset = InteresFormSet(instance=encuesta)
+    return render(request, 'agregar_formset.html', {'formset': formset, 'pk': pk})
+
+
 def agregar_encuesta(request):  #todo: ok
     form = EncuestaForm()
     if request.method == 'POST':
@@ -20,43 +31,8 @@ def agregar_encuesta(request):  #todo: ok
         if form.is_valid():
             encuesta = form.save()
             pk = encuesta.id
-            return redirect('agregar_interes', pk)
+            return redirect('agregar_interes_formset', pk)
     return render(request, 'agregar_encuesta.html', {'form': form})
-
-
-def agregar_interes(request, pk):  #todo: ok
-    form = InteresesForm()
-    if request.method == 'POST':
-        encuesta = Encuesta.objects.get(id=pk)
-        form = InteresesForm(request.POST)
-        if form.is_valid():
-            interes = form.save(commit=False)
-            interes.encuesta = encuesta
-            interes.save()
-            return redirect('agregar_interes', pk)
-    return render(request, 'agregar_interes.html', {'form': form, 'pk': pk})
-
-
-def editar_interes(request, id_i, pk):  #todo: ok
-        interes = get_object_or_404(Intereses, id=id_i)
-        form = InteresesForm(instance=interes)
-        if request.method == "POST":
-            form = InteresesForm(request.POST, instance=interes)
-            if form.is_valid():
-                form.save()
-                return redirect('mis_intereses', pk)
-        return render(request, 'editar_interes.html', {'form': form, 'pk': pk})
-
-
-def eliminar_interes(request, id_i, pk):  #todo: ok
-    interes_temp = Intereses.objects.get(id=id_i).delete()
-    return redirect('mis_intereses', pk)
-
-
-def mis_intereses(request, pk):  #todo: ok
-    encuesta = Encuesta.objects.get(id=pk)
-    intereses = Intereses.objects.filter(encuesta__id=encuesta.pk)
-    return render(request, 'mis_intereses.html', {'intereses': intereses, 'pk': pk})
 
 
 class ReporteEncuestaPDF(View):  #todo: ok

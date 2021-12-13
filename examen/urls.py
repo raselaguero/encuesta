@@ -22,9 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.inicio, name='inicio'),
     path('agregar-encuesta/', views.agregar_encuesta, name='agregar_encuesta'),
-    path('agregar-interes-personal/<int:pk>/', views.agregar_interes, name='agregar_interes'),
     path('reporte-encuesta-pdf/<int:pk>/', views.ReporteEncuestaPDF.as_view(), name='ReporteEncuestaPDF'),
-    path('editar-interes-personal/<int:id_i>/<int:pk>/', views.editar_interes, name='editar_interes'),
-    path('eliminar-interes-personal/<int:id_i>/<int:pk>/', views.eliminar_interes, name='eliminar_interes'),
-    path('mis-intereses/<int:pk>/', views.mis_intereses, name='mis_intereses')
+    path('agregar-interes-personal/<int:pk>/', views.agregar_interes_formset, name='agregar_interes_formset'),
 ]
