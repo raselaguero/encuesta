@@ -1,0 +1,54 @@
+{% extends 'base_form.html' %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block content %}
+
+    <h2 style="text-align: center; margin-top: 50px">Mis intereses</h2>
+    <div class="ui middle aligned center aligned grid ">
+        <div id="add_cama" class="column">
+            {% if intereses %}
+
+                {% for interes  in intereses %}
+
+
+                    <div class="ui stacked segment">
+                        <p class="field">
+                            <strong>Interés personal</strong>
+
+                        <p>{{ interes.intereses_personales|truncatechars:40 }}</p>
+
+                        <div class="ui buttons">
+                            <a style="background-color: #35BB9B" class="ui button"
+                               href="{% url 'editar_interes' interes.id pk %}">Editar</a>
+
+                            <div class="or"></div>
+                            <a class="ui button" href="{% url 'eliminar_interes' interes.id pk %}">Eliminar</a>
+                        </div>
+                    </div>
+                {% endfor %}
+                <br>
+                <div class="ui large">
+                    <a href="{% url 'agregar_interes' pk %}">
+                        <div style="background-color: #35BB9B" class="ui fluid large button">Agregar</div>
+                    </a>
+                    <br>
+                    <a href="{% url 'ReporteEncuestaPDF' pk %}">
+                        <div style="background-color: #35B" class="ui fluid large button">Exportar</div>
+                    </a>
+                </div>
+            {% else %}
+                <p>No hay intereses disponibles.</p>
+
+                <a href="{% url 'agregar_interes' pk %}">
+                    <div style="background-color: #35BB9B" class="ui button">
+                        Agregar
+                    </div>
+                </a>
+
+                </div>
+                </div>
+            {% endif %}
+{% endblock %}

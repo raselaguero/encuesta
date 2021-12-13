@@ -1,0 +1,66 @@
+{% extends 'base_form.html' %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block content %}
+    <h1 style="text-align: center; margin-top: 50px">Encuesta</h1>
+    <div class="ui middle aligned center aligned grid ">
+        <div id="add_cama" class="column">
+            <form class="ui large form" action="" method="POST">
+                {% csrf_token %}
+                <div class="ui stacked segment">
+                    <div class="field">
+                        <label>Nombre Completo</label>
+
+                        <div class="ui left icon input">
+                            {{ form.nombre }}
+                            {{ form.nombre.errors }}
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Edad</label>
+
+                        <div class="ui left icon input">
+                            {{ form.edad }}
+                            {{ form.edad.errors }}
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Sexo</label>
+
+                        <div class="ui left icon input">
+                            {{ form.sexo }}
+                            {{ form.sexo.errors }}
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Grado Escolar</label>
+
+                        <div class="ui left icon input">
+                            {{ form.grado_escolaridad }}
+                            {{ form.grado_escolaridad.errors }}
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Peso Corporal</label>
+
+                        <div class="ui left icon input">
+                            {{ form.peso_corporal }}
+                            {{ form.peso_corporal.errors }}
+                        </div>
+                    </div>
+                    <div class="ui buttons">
+                        <button style="background-color: #35BB9B" type="submit" class="ui button">Guardar</button>
+                        <div class="or"></div>
+                        <button type="reset" class="ui button">Cancelar</button>
+                    </div>
+                </div>
+                <div class="ui large">
+                    <a class="ui fluid large button" href="{% url 'inicio' %}">Regresar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

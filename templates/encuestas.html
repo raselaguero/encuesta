@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block content %}
+    {% if encuestas %}
+        {% for en in encuestas %}
+
+
+        {% endfor %}
+    {% else %}
+        <p>No hay encuestas disponibles</p>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block content %}
+    <div class="ui middle aligned center aligned grid ">
+        <div class="column">
+            <h1>Bienvenido</h1>
+
+            <h3>¿Estás feliz con tu Smartphone? | Haznos saber cómo te sientes</h3>
+
+            <p>
+                <strong>Hola,</strong><br>
+
+                Esperamos que estés disfrutando de tu reciente compra de Samsung S3 de Samsung Corporation.
+
+                ¿Deseas contestar una breve encuesta para ayudarnos a mejorar nuestros servicios? ¡Sólo te tomará 5
+                minutos!
+
+                Gracias de antemano por tus valiosos comentarios. Tu opinión será utilizada para asegurar que
+                continuemos
+                satisfaciendo tus necesidades.
+
+                Agradecemos tu confianza y esperamos poder servirte en el futuro. Para cualquier pregunta, por favor,
+                ponte
+                en contacto con nuestro Servicio de atención al cliente correo@nauta.cu.<br>
+
+                <strong>Gracias.</strong></p>
+
+            <div class="ui large">
+                <a class="ui fluid large button" href="{% url 'agregar_encuesta' %}">Ir a la encuesta</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
